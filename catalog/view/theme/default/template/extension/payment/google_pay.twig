@@ -224,8 +224,40 @@ function onGooglePaymentButtonClicked() {
         processGooglePayPayment(paymentData);
     }).catch(function(err) {
         // pass any payment errors to the gateway logic to handle/output
-        handleGooglePayPaymentError(err);
+		console.error(err);
     });
+}
+
+/**
+* Process payment data returned by the Google Pay API
+*/
+function processPayment(paymentData) {
+	// show returned data in developer console for debugging
+	console.log(paymentData);
+	
+	$.ajax({
+		method: 'post',
+		url: 'index.php?route=extension/payment/google_pay/send',
+		data: {'data': JSON.stringify(paymentData)},
+		dataType: 'json',
+		success: function(json) {
+			showAlert(json);
+														
+			if (json['success']) {
+				location = json['success'];
+			}
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+					
+	/*$("#result").text(JSON.stringify(paymentData));
+	$('#result').append("<br/><br/>");
+	$("#result").append(JSON.stringify(paymentData['paymentMethodData']));
+	$('#result').append("<br/><br/>");
+	$("#result").append(JSON.stringify(JSON.parse(paymentData.paymentMethodData.tokenizationData.token)));*/
+	// @todo pass payment data response to gateway to process payment
 }
 
 /**

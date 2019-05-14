@@ -1,7 +1,7 @@
 <?php
 class ControllerExtensionPaymentGooglePay extends Controller {
-	private $merchant_id = 12345;
-
+	private $error = array();
+	
 	public function index() {
 		$this->load->language('extension/payment/google_pay');
 
@@ -20,7 +20,7 @@ class ControllerExtensionPaymentGooglePay extends Controller {
 		$data['api_version_major'] = $config_setting['api_version_major'];
 		$data['api_version_minor'] = $config_setting['api_version_minor'];
 		
-		$data['merchant_id'] = $this->merchant_id;
+		$data['merchant_id'] = $this->config->get('payment_google_pay_merchant_id');
 		$data['merchant_name'] = $this->config->get('payment_google_pay_merchant_name');
 		$data['environment'] = strtoupper($this->config->get('payment_google_pay_environment'));
 		$data['debug'] = $this->config->get('payment_google_pay_debug');
@@ -78,5 +78,44 @@ class ControllerExtensionPaymentGooglePay extends Controller {
 		}
 		
 		return $this->load->view('extension/payment/google_pay', $data);
+	}
+	
+	public function send() {
+		$this->load->language('extension/payment/google_pay');
+		
+		$this->load->model('checkout/order');
+		
+		if (isset($this->request->post['data'])) {
+			$json_data = json_decode(htmlspecialchars_decode($this->request->post['data']), true);
+		}
+		
+		print_R($json_data);
+		
+		/*if (utf8_strlen($this->request->post['cc_number']) < 1) {
+			$this->error['warning'] = $this->language->get('error_warning');
+			$this->error['cc_number'] = $this->language->get('error_cc_number');
+		}
+		
+		if (utf8_strlen($this->request->post['cc_cvv2']) < 1) {
+			$this->error['warning'] = $this->language->get('error_warning');
+			$this->error['cc_cvv2'] = $this->language->get('error_cc_cvv2');
+		}*/
+		
+		if (!$this->error) {						
+			$this->model_checkout_order->addOrderHistory($this->session->data['order_id'], $this->config->get('payment_pp_pro_order_status_id'), $message, false);
+		}
+				
+		if (!$this->error) {
+			$data['success'] = $this->url->link('checkout/success');
+		}
+		
+		if ($this->error) {
+			$data['confirm'] = true;
+		}
+		
+		$data['error'] = $this->error;
+				
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($data));
 	}
 }
