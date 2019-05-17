@@ -224,7 +224,7 @@ function onGooglePaymentButtonClicked() {
         console.log('Payment Data, send to gateway');
 
         processGooglePayPayment(paymentData);
-    }).catch(function(err) {
+    }).catch(function(err) {alert(err);
         // pass any payment errors to the gateway logic to handle/output
 		console.error(err);
     });
@@ -233,7 +233,7 @@ function onGooglePaymentButtonClicked() {
 /**
 * Process payment data returned by the Google Pay API
 */
-function processPayment(paymentData) {
+function processGooglePayPayment(paymentData) {
 	// show returned data in developer console for debugging
 	console.log(paymentData);
 	
@@ -253,13 +253,6 @@ function processPayment(paymentData) {
 			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 		}
 	});
-					
-	/*$("#result").text(JSON.stringify(paymentData));
-	$('#result').append("<br/><br/>");
-	$("#result").append(JSON.stringify(paymentData['paymentMethodData']));
-	$('#result').append("<br/><br/>");
-	$("#result").append(JSON.stringify(JSON.parse(paymentData.paymentMethodData.tokenizationData.token)));*/
-	// @todo pass payment data response to gateway to process payment
 }
 
 /**

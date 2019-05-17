@@ -88,29 +88,39 @@ class ControllerExtensionPaymentGooglePay extends Controller {
 		if (isset($this->request->post['data'])) {
 			$json_data = json_decode(htmlspecialchars_decode($this->request->post['data']), true);
 		}
-		
-		print_R($json_data);
-		
-		/*if (utf8_strlen($this->request->post['cc_number']) < 1) {
-			$this->error['warning'] = $this->language->get('error_warning');
-			$this->error['cc_number'] = $this->language->get('error_cc_number');
-		}
-		
-		if (utf8_strlen($this->request->post['cc_cvv2']) < 1) {
-			$this->error['warning'] = $this->language->get('error_warning');
-			$this->error['cc_cvv2'] = $this->language->get('error_cc_cvv2');
-		}*/
-		
+				
 		if (!$this->error) {						
-			$this->model_checkout_order->addOrderHistory($this->session->data['order_id'], $this->config->get('payment_pp_pro_order_status_id'), $message, false);
+			$message = '';
+													
+			if (isset($json_data['paymentMethodData']['description'])) {
+				$message .= $this->language->get('text_description') . $json_data['paymentMethodData']['description'] . "\n";
+			}
+			
+			if (isset($json_data['paymentMethodData']['tokenizationData']['type'])) {
+				$message .= $this->language->get('text_tokenization_data_type') . $json_data['paymentMethodData']['tokenizationData']['type'] . "\n";
+			}
+			
+			if (isset($json_data['paymentMethodData']['tokenizationData']['token'])) {
+				$message .= $this->language->get('text_tokenization_data_token') . $json_data['paymentMethodData']['tokenizationData']['token'] . "\n";
+			}
+			
+			if (isset($json_data['paymentMethodData']['type'])) {
+				$message .= $this->language->get('text_type') . $json_data['paymentMethodData']['type'] . "\n";
+			}
+
+			if (isset($json_data['paymentMethodData']['info']['cardNetwork'])) {
+				$message .= $this->language->get('text_card_network') . $json_data['paymentMethodData']['info']['cardNetwork'] . "\n";
+			}
+			
+			if (isset($json_data['paymentMethodData']['info']['cardDetails'])) {
+				$message .= $this->language->get('text_card_details') . $json_data['paymentMethodData']['info']['cardDetails'] . "\n";
+			}
+			
+			$this->model_checkout_order->addOrderHistory($this->session->data['order_id'], $this->config->get('payment_google_pay_order_status_id'), $message, false);
 		}
 				
 		if (!$this->error) {
 			$data['success'] = $this->url->link('checkout/success');
-		}
-		
-		if ($this->error) {
-			$data['confirm'] = true;
 		}
 		
 		$data['error'] = $this->error;
