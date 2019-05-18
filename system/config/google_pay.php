@@ -41,7 +41,7 @@ $_['payment_google_pay_setting'] = array(
 					'code' => 'braintree_sdk_version',
 					'name' => 'text_braintree_sdk_version',
 					'type' => 'text',
-					'value' => ''
+					'value' => 'v3.40.0'
 				),
 				'braintree_merchant_id' => array(
 					'code' => 'braintree_merchant_id',
