@@ -54,7 +54,9 @@ const baseCardPaymentMethod = {
 	parameters: {
 		allowedAuthMethods: allowedCardAuthMethods,
 		allowedCardNetworks: allowedCardNetworks,
-		allowPrepaidCards: {{ accept_prepay_cards }}
+		allowPrepaidCards: {{ accept_prepay_cards }},
+		billingAddressRequired: {{ bill_require_phone }},
+		billingAddressParameters: {{ ship_require_phone }}
     }
 };
 

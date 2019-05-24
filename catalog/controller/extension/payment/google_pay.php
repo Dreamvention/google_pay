@@ -25,6 +25,8 @@ class ControllerExtensionPaymentGooglePay extends Controller {
 		$data['environment'] = strtoupper($this->config->get('payment_google_pay_environment'));
 		$data['debug'] = $this->config->get('payment_google_pay_debug');
 		$data['accept_prepay_cards'] = $this->config->get('payment_google_pay_accept_prepay_cards');
+		$data['bill_require_phone'] = $this->config->get('payment_google_pay_bill_require_phone');
+		$data['ship_require_phone'] = $this->config->get('payment_google_pay_ship_require_phone');
 		$data['button_color'] = $this->config->get('payment_google_pay_button_color');
 		$data['button_type'] = $this->config->get('payment_google_pay_button_type');
 		
