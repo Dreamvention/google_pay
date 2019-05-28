@@ -6,8 +6,7 @@ class ControllerExtensionPaymentGooglePay extends Controller {
 		$this->load->language('extension/payment/google_pay');
 
 		$this->load->model('checkout/order');
-		$this->load->model('extension/payment/google_pay');
-
+		
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 
 		$data['total_price'] = $this->currency->format($order_info['total'], $order_info['currency_code'], $order_info['currency_value'], false);
@@ -15,25 +14,25 @@ class ControllerExtensionPaymentGooglePay extends Controller {
 
 		$_config = new Config();
 		$_config->load('google_pay');
-		$config_setting = ($_config->get('payment_google_pay_setting')) ? $_config->get('payment_google_pay_setting') : array();
+		$config_setting = ($_config->get('google_pay_setting')) ? $_config->get('google_pay_setting') : array();
 		
 		$data['api_version_major'] = $config_setting['api_version_major'];
 		$data['api_version_minor'] = $config_setting['api_version_minor'];
 		
-		$data['merchant_id'] = $this->config->get('payment_google_pay_merchant_id');
-		$data['merchant_name'] = $this->config->get('payment_google_pay_merchant_name');
-		$data['environment'] = strtoupper($this->config->get('payment_google_pay_environment'));
-		$data['debug'] = $this->config->get('payment_google_pay_debug');
-		$data['accept_prepay_cards'] = $this->config->get('payment_google_pay_accept_prepay_cards');
-		$data['bill_require_phone'] = $this->config->get('payment_google_pay_bill_require_phone');
-		$data['ship_require_phone'] = $this->config->get('payment_google_pay_ship_require_phone');
-		$data['button_color'] = $this->config->get('payment_google_pay_button_color');
-		$data['button_type'] = $this->config->get('payment_google_pay_button_type');
+		$data['merchant_id'] = $this->config->get('google_pay_merchant_id');
+		$data['merchant_name'] = $this->config->get('google_pay_merchant_name');
+		$data['environment'] = strtoupper($this->config->get('google_pay_environment'));
+		$data['debug'] = $this->config->get('google_pay_debug');
+		$data['accept_prepay_cards'] = $this->config->get('google_pay_accept_prepay_cards');
+		$data['bill_require_phone'] = $this->config->get('google_pay_bill_require_phone');
+		$data['ship_require_phone'] = $this->config->get('google_pay_ship_require_phone');
+		$data['button_color'] = $this->config->get('google_pay_button_color');
+		$data['button_type'] = $this->config->get('google_pay_button_type');
 		
-		$merchant_gateway_code = $this->config->get('payment_google_pay_merchant_gateway_code');
-		$merchant_gateway = $this->config->get('payment_google_pay_merchant_gateway');
-		$card_networks_code = $this->config->get('payment_google_pay_card_networks_code');
-		$auth_methods_code = $this->config->get('payment_google_pay_auth_methods_code');
+		$merchant_gateway_code = $this->config->get('google_pay_merchant_gateway_code');
+		$merchant_gateway = $this->config->get('google_pay_merchant_gateway');
+		$card_networks_code = $this->config->get('google_pay_card_networks_code');
+		$auth_methods_code = $this->config->get('google_pay_auth_methods_code');
 		
 		$parameters = array();
 		
@@ -118,7 +117,7 @@ class ControllerExtensionPaymentGooglePay extends Controller {
 				$message .= $this->language->get('text_card_details') . $json_data['paymentMethodData']['info']['cardDetails'] . "\n";
 			}
 			
-			$this->model_checkout_order->addOrderHistory($this->session->data['order_id'], $this->config->get('payment_google_pay_order_status_id'), $message, false);
+			$this->model_checkout_order->addOrderHistory($this->session->data['order_id'], $this->config->get('google_pay_order_status_id'), $message, false);
 		}
 				
 		if (!$this->error) {
