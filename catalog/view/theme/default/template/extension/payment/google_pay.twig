@@ -12,7 +12,9 @@
 */
 const baseRequest = {
 	apiVersion: {{ api_version_major }},
-	apiVersionMinor: {{ api_version_minor }}
+	apiVersionMinor: {{ api_version_minor }},
+	shippingAddressRequired: {{ ship_require_phone }},
+	shippingAddressParameters: { phoneNumberRequired: {{ ship_require_phone }} }
 };
 
 /**
@@ -53,7 +55,10 @@ const baseCardPaymentMethod = {
 	type: 'CARD',
 	parameters: {
 		allowedAuthMethods: allowedCardAuthMethods,
-		allowedCardNetworks: allowedCardNetworks
+		allowedCardNetworks: allowedCardNetworks,
+		allowPrepaidCards: {{ accept_prepay_cards }},
+		billingAddressRequired: {{ bill_require_phone }},
+		billingAddressParameters: { phoneNumberRequired: {{ bill_require_phone }} }
     }
 };
 
@@ -139,7 +144,6 @@ function getGooglePaymentDataRequest() {
 	paymentDataRequest.merchantInfo = {
 		// @todo a merchant ID is available for a production environment after approval by Google
 		// See {@link https://developers.google.com/pay/api/web/guides/test-and-deploy/integration-checklist|Integration checklist}
-		// merchantId: '01234567890123456789',
 		merchantId: '{{ merchant_id }}',
 		merchantName: '{{ merchant_name }}'
     };
@@ -223,7 +227,7 @@ function onGooglePaymentButtonClicked() {
         console.log('Payment Data, send to gateway');
 
         processGooglePayPayment(paymentData);
-    }).catch(function(err) {alert(err);
+    }).catch(function(err) {
         // pass any payment errors to the gateway logic to handle/output
 		console.error(err);
     });

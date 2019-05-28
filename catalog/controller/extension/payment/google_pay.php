@@ -47,8 +47,8 @@ class ControllerExtensionPaymentGooglePay extends Controller {
 				'gateway' => 'braintree',
 				'braintree:apiVersion' => $merchant_gateway[$merchant_gateway_code]['field']['braintree_api_version'],
 				'braintree:sdkVersion' => $merchant_gateway[$merchant_gateway_code]['field']['braintree_sdk_version'],
-				'braintree:merchantId' => $merchant_gateway[$merchant_gateway_code]['field']['braintree_api_version'],
-				'braintree:clientKey' => $merchant_gateway[$merchant_gateway_code]['field']['braintree_api_version']
+				'braintree:merchantId' => $merchant_gateway[$merchant_gateway_code]['field']['braintree_merchant_id'],
+				'braintree:clientKey' => $merchant_gateway[$merchant_gateway_code]['field']['braintree_tokenization_key']
 			);
 		} elseif ($merchant_gateway_code == 'globalpayments') {
 			$parameters = array(
