@@ -11,10 +11,10 @@
 * @see {@link https://developers.google.com/pay/api/web/reference/object#PaymentDataRequest|apiVersion in PaymentDataRequest}
 */
 const baseRequest = {
-	apiVersion: {{ api_version_major }},
-	apiVersionMinor: {{ api_version_minor }},
-	shippingAddressRequired: {{ ship_require_phone }},
-	shippingAddressParameters: { phoneNumberRequired: {{ ship_require_phone }} }
+	apiVersion: <?php echo $api_version_major; ?>,
+	apiVersionMinor: <?php echo $api_version_minor; ?>,
+	shippingAddressRequired: <?php echo $ship_require_phone; ?>,
+	shippingAddressParameters: { phoneNumberRequired: <?php echo $ship_require_phone; ?> }
 };
 
 /**
@@ -26,7 +26,7 @@ const baseRequest = {
 * @todo check with your gateway on the parameters to pass
 * @see {@link https://developers.google.com/pay/api/web/reference/object#Gateway|PaymentMethodTokenizationSpecification}
 */
-const tokenizationSpecification = {{ tokenization_specification|json_encode() }};
+const tokenizationSpecification = <?php echo json_encode($tokenization_specification); ?>;
 
 /**
 * Card networks supported by your site and your gateway
@@ -34,7 +34,7 @@ const tokenizationSpecification = {{ tokenization_specification|json_encode() }}
 * @see {@link https://developers.google.com/pay/api/web/reference/object#CardParameters|CardParameters}
 * @todo confirm card networks supported by your site and gateway
 */
-const allowedCardNetworks = {{ allowed_card_networks|json_encode() }};
+const allowedCardNetworks = <?php echo json_encode($allowed_card_networks); ?>;
 
 /**
 * Card authentication methods supported by your site and your gateway
@@ -43,7 +43,7 @@ const allowedCardNetworks = {{ allowed_card_networks|json_encode() }};
 * @todo confirm your processor supports Android device tokens for your
 * supported card networks
 */
-const allowedCardAuthMethods = {{ allowed_card_auth_methods|json_encode() }};
+const allowedCardAuthMethods = <?php echo json_encode($allowed_card_auth_methods); ?>;
 
 /**
 * Describe your site's support for the CARD payment method and its required
@@ -56,9 +56,9 @@ const baseCardPaymentMethod = {
 	parameters: {
 		allowedAuthMethods: allowedCardAuthMethods,
 		allowedCardNetworks: allowedCardNetworks,
-		allowPrepaidCards: {{ accept_prepay_cards }},
-		billingAddressRequired: {{ bill_require_phone }},
-		billingAddressParameters: { phoneNumberRequired: {{ bill_require_phone }} }
+		allowPrepaidCards: <?php echo $accept_prepay_cards; ?>,
+		billingAddressRequired: <?php echo $bill_require_phone; ?>,
+		billingAddressParameters: { phoneNumberRequired: <?php echo $bill_require_phone; ?> }
     }
 };
 
@@ -114,6 +114,7 @@ function setupGooglePay() {
     }).catch(function(err) {
         // show error in developer console for debugging
         console.error(err);
+		showAlert({error: {warning: err.statusMessage}});
     });
 }
 
@@ -144,8 +145,8 @@ function getGooglePaymentDataRequest() {
 	paymentDataRequest.merchantInfo = {
 		// @todo a merchant ID is available for a production environment after approval by Google
 		// See {@link https://developers.google.com/pay/api/web/guides/test-and-deploy/integration-checklist|Integration checklist}
-		merchantId: '{{ merchant_id }}',
-		merchantName: '{{ merchant_name }}'
+		merchantId: '<?php echo $merchant_id; ?>',
+		merchantName: '<?php echo $merchant_name; ?>'
     };
 	
     return paymentDataRequest;
@@ -159,7 +160,7 @@ function getGooglePaymentDataRequest() {
 */
 function getGooglePaymentsClient() {
 	if (paymentsClient === null) {
-		paymentsClient = new google.payments.api.PaymentsClient({environment: '{{ environment }}'});
+		paymentsClient = new google.payments.api.PaymentsClient({environment: '<?php echo $environment; ?>'});
     }
 	
     return paymentsClient;
@@ -174,8 +175,8 @@ function getGooglePaymentsClient() {
 function addGooglePayButton() {
     const paymentsClient = getGooglePaymentsClient();
     const button = paymentsClient.createButton({
-        buttonColor: '{{ button_color }}',
-        buttonType: '{{ button_type }}',
+        buttonColor: '<?php echo $button_color; ?>',
+        buttonType: '<?php echo $button_type; ?>',
         onClick: onGooglePaymentButtonClicked
     });
 
@@ -190,9 +191,9 @@ function addGooglePayButton() {
 */
 function getGoogleTransactionInfo() {
 	return {
-		currencyCode: '{{ currency_code }}',
+		currencyCode: '<?php echo $currency_code; ?>',
 		totalPriceStatus: 'FINAL',
-		totalPrice: '{{ total_price }}',
+		totalPrice: '<?php echo $total_price; ?>',
 		checkoutOption: 'COMPLETE_IMMEDIATE_PURCHASE'
 	};
 }
@@ -207,8 +208,8 @@ function prefetchGooglePaymentData() {
     // transactionInfo must be set but does not affect cache
     paymentDataRequest.transactionInfo = {
 		totalPriceStatus: 'FINAL',
-		totalPrice: '{{ total_price }}',
-		currencyCode: '{{ currency_code }}'
+		totalPrice: '<?php echo $total_price; ?>',
+		currencyCode: '<?php echo $currency_code; ?>'
     };
     const paymentsClient = getGooglePaymentsClient();
     paymentsClient.prefetchPaymentData(paymentDataRequest);
@@ -230,6 +231,7 @@ function onGooglePaymentButtonClicked() {
     }).catch(function(err) {
         // pass any payment errors to the gateway logic to handle/output
 		console.error(err);
+		showAlert({error: {warning: err.statusMessage}});
     });
 }
 
@@ -242,7 +244,7 @@ function processGooglePayPayment(paymentData) {
 	
 	$.ajax({
 		method: 'post',
-		url: 'index.php?route=extension/payment/google_pay/send',
+		url: 'index.php?route=payment/google_pay/send',
 		data: {'data': JSON.stringify(paymentData)},
 		dataType: 'json',
 		success: function(json) {
@@ -275,7 +277,7 @@ function showAlert(json) {
 * Show Console Debug
 */
 function showConsoleDebug(debug_type, debug_data) {
-	{% if (debug == 1) %}
+	<?php if ($debug == 1) { ?>
     if (debug_type == 'log') {
 		console.log(debug_data);
     }
@@ -287,7 +289,7 @@ function showConsoleDebug(debug_type, debug_data) {
 	if (debug_type == 'error') {
 		console.error(debug_data);
     }
-    {% endif %}
+    <?php } ?>
 }
 
 </script>

@@ -4,7 +4,7 @@ $_['heading_title']					 	= 'Google Pay';
 
 // Text
 $_['text_google_pay']				 	= '<img src="view/image/payment/googlepay.png" height="40" alt="Google Pay" title="Google Pay" style="border: 0px;" />';
-$_['text_extension']			 	 	= 'Extensions';
+$_['text_payments']					 	= 'Payments';
 $_['text_edit']			 	 		 	= 'Edit Google Pay';
 $_['text_general']				 	 	= 'General';
 $_['text_gateway']					 	= 'Gateway';
