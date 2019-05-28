@@ -114,6 +114,7 @@ function setupGooglePay() {
     }).catch(function(err) {
         // show error in developer console for debugging
         console.error(err);
+		showAlert({error: {warning: err.statusMessage}});
     });
 }
 
@@ -230,6 +231,7 @@ function onGooglePaymentButtonClicked() {
     }).catch(function(err) {
         // pass any payment errors to the gateway logic to handle/output
 		console.error(err);
+		showAlert({error: {warning: err.statusMessage}});
     });
 }
 

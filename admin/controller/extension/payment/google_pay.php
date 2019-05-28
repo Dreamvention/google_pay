@@ -55,7 +55,7 @@ class ControllerExtensionPaymentGooglePay extends Controller {
 		);
 
 		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('text_extension'),
+			'text' => $this->language->get('text_extensions'),
 			'href' => $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=payment', true)
 		);
 
@@ -65,6 +65,7 @@ class ControllerExtensionPaymentGooglePay extends Controller {
 		);
 
 		$data['action'] = $this->url->link('extension/payment/google_pay', 'user_token=' . $this->session->data['user_token'], true);
+		
 		$data['cancel'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=payment', true);
 
 		$_config = new Config();

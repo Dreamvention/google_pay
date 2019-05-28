@@ -6,8 +6,7 @@ class ControllerExtensionPaymentGooglePay extends Controller {
 		$this->load->language('extension/payment/google_pay');
 
 		$this->load->model('checkout/order');
-		$this->load->model('extension/payment/google_pay');
-
+		
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 
 		$data['total_price'] = $this->currency->format($order_info['total'], $order_info['currency_code'], $order_info['currency_value'], false);

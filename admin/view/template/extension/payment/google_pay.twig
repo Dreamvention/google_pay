@@ -3,7 +3,7 @@
 	<div class="page-header">
 		<div class="container-fluid">
 			<div class="pull-right">
-				<button type="submit" form="form-payment" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+				<button type="submit" form="form_payment" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
 				<a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
 			</div>
 			<h1>{{ heading_title }}</h1>
@@ -25,7 +25,7 @@
 				<h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
 			</div>
 			<div class="panel-body">
-				<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-payment" class="form-horizontal">
+				<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form_payment" class="form-horizontal">
 					<ul class="nav nav-tabs" id="tabs">
 						<li class="active"><a href="#tab_general" data-toggle="tab">{{ text_general }}</a></li>
 						<li><a href="#tab_gateway" data-toggle="tab">{{ text_gateway }}</a></li>
@@ -101,7 +101,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-2 control-label" for="input-sort-order">{{ entry_sort_order }}</label>
+								<label class="col-sm-2 control-label" for="input_sort_order">{{ entry_sort_order }}</label>
 								<div class="col-sm-10">
 									<input type="text" name="payment_google_pay_sort_order" value="{{ payment_google_pay_sort_order }}" placeholder="{{ entry_sort_order }}" id="input_sort_order" class="form-control"/>
 								</div>
@@ -138,9 +138,9 @@
 						</div>
 						<div class="tab-pane" id="tab_gateway">
 							<div class="form-group">
-								<label class="col-sm-2 control-label" for="input-merchant-gateway">{{ entry_merchant_gateway }}</label>
+								<label class="col-sm-2 control-label" for="input_merchant_gateway">{{ entry_merchant_gateway }}</label>
 								<div class="col-sm-10">
-									<select name="payment_google_pay_merchant_gateway_code" id="input_payment_google_pay_merchant_gateway_code" class="form-control">
+									<select name="payment_google_pay_merchant_gateway_code" id="input_merchant_gateway_code" class="form-control">
 										{% for merchant_gateway in merchant_gateways %}
 										{% if (merchant_gateway['code'] == payment_google_pay_merchant_gateway_code) %}
 										<option value="{{ merchant_gateway['code'] }}" selected="selected">{{ attribute(_context, merchant_gateway['name']) }}</option>
@@ -157,9 +157,9 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label" for="input_{{ field['code'] }}">{{ attribute(_context, field['name']) }}</label>
 									<div class="col-sm-10">
-									{% if (field['type'] == 'text') %}
+										{% if (field['type'] == 'text') %}
 										<input type="text" name="payment_google_pay_merchant_gateway[{{ merchant_gateway['code'] }}][field][{{ field['code'] }}]" value="{% if payment_google_pay_merchant_gateway[merchant_gateway['code']]['field'][field['code']] is defined %}{{ payment_google_pay_merchant_gateway[merchant_gateway['code']]['field'][field['code']] }}{% elseif field['value'] is defined %}{{ field['value'] }}{% endif %}" class="form-control" />
-									{% endif %}
+										{% endif %}
 									</div>
 								</div>
 								{% endfor %}
@@ -192,7 +192,7 @@
 								<label class="col-sm-2 control-label" for="input_auth_method"><span data-toggle="tooltip" title="{{ help_auth_methods }}">{{ entry_auth_methods }}</span></label>
 								<div class="col-sm-10">
 									<div class="well well-sm" style="height: 80px; overflow: auto;">
-									{% for auth_method in auth_methods %}
+										{% for auth_method in auth_methods %}
 										<div class="checkbox">
 											<label>
 												{% if auth_method['code'] in payment_google_pay_auth_methods_code %}
@@ -298,13 +298,13 @@
   
 checkMerchantGateway();
 
-$('#input_payment_google_pay_merchant_gateway_code').on('change', function() {
+$('#input_merchant_gateway_code').on('change', function() {
 	checkMerchantGateway();
 });	
 
 function checkMerchantGateway() {
 	$('.merchant-gateway').addClass('hidden');
-	$('.merchant-gateway-' + $('#input_payment_google_pay_merchant_gateway_code').val()).removeClass('hidden');
+	$('.merchant-gateway-' + $('#input_merchant_gateway_code').val()).removeClass('hidden');
 }
 
 </script>
