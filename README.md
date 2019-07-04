@@ -1,4 +1,4 @@
-# Google Pay for OpenCart 
+# Google Pay for OpenCart v2.3.x
 
 Google Pay is a digital wallet platform and online payment system developed by Google to power in-app and tap-to-pay purchases on mobile devices, enabling users to make payments with Android phones, tablets or watches.
 
