@@ -160,6 +160,17 @@
 										{% if (field['type'] == 'text') %}
 										<input type="text" name="payment_google_pay_merchant_gateway[{{ merchant_gateway['code'] }}][field][{{ field['code'] }}]" value="{% if payment_google_pay_merchant_gateway[merchant_gateway['code']]['field'][field['code']] is defined %}{{ payment_google_pay_merchant_gateway[merchant_gateway['code']]['field'][field['code']] }}{% elseif field['value'] is defined %}{{ field['value'] }}{% endif %}" class="form-control" />
 										{% endif %}
+										{% if (field['type'] == 'select') %}
+										<select name="payment_google_pay_merchant_gateway[{{ merchant_gateway['code'] }}][field][{{ field['code'] }}]" class="form-control">
+											{% for option in field['option'] %}
+											{% if (option['code'] == payment_google_pay_merchant_gateway[merchant_gateway['code']]['field'][field['code']]) %}
+											<option value="{{ option['code'] }}" selected="selected">{{ attribute(_context, option['name']) }}</option>
+											{% else %}
+											<option value="{{ option['code'] }}">{{ attribute(_context, option['name']) }}</option>
+											{% endif %}
+											{% endfor %}
+										</select>
+										{% endif %}
 									</div>
 								</div>
 								{% endfor %}

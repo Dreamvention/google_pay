@@ -43,9 +43,36 @@ $_['payment_google_pay_setting'] = array(
 					'type' => 'text',
 					'value' => '3.40.0'
 				),
+				'braintree_environment' => array(
+					'code' => 'braintree_environment',
+					'name' => 'text_braintree_environment',
+					'type' => 'select',
+					'option' => array(
+						'sandbox' => array(
+							'code' => 'sandbox', 
+							'name' => 'text_sandbox'
+						),
+						'production' => array(
+							'code' => 'production', 
+							'name' => 'text_production'
+						)
+					)
+				),
 				'braintree_merchant_id' => array(
 					'code' => 'braintree_merchant_id',
 					'name' => 'text_braintree_merchant_id',
+					'type' => 'text',
+					'value' => ''
+				),
+				'braintree_public_key' => array(
+					'code' => 'braintree_public_key',
+					'name' => 'text_braintree_public_key',
+					'type' => 'text',
+					'value' => ''
+				),
+				'braintree_private_key' => array(
+					'code' => 'braintree_private_key',
+					'name' => 'text_braintree_private_key',
 					'type' => 'text',
 					'value' => ''
 				),
