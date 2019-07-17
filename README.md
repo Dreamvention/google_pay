@@ -1,18 +1,19 @@
-# Google Pay for OpenCart 
+# Google Pay<sup>TM</sup> with OpenCart 
 
-Google Pay is a digital wallet platform and online payment system developed by Google to power in-app and tap-to-pay purchases on mobile devices, enabling users to make payments with Android phones, tablets or watches.
+Google Pay lets your customers pay with the press of a button — using payment methods saved to their Google Accounts. Google Pay works for both customers shopping at physical store and online in your apps or websites. Now, this is also possible with OpenCart's extension.
 
-Now you can offer one-click checkout for your customers, reduce abandoned cart rate and increase conversion. 
+With Google Pay extension, you can offer one-click checkout for your customers, reduce abandoned cart rate and increase conversion. 
 
 ## Here is how you can set up Google Pay today:
 
-1. [Download](https://www.opencart.com/index.php?route=marketplace/download&member_token=vYblOTrYQ1rwGyHBu7dbnkkG6ExRznUL&extension_id=37076) the Google Pay OpenCart Extension for the marketplace
+1. By using Google Pay extension, you adhere to the Google Pay APIs [Acceptable Use Policy](https://payments.developers.google.com/terms/aup) and accept the terms defined in the [Google Pay API Terms of Service](https://payments.developers.google.com/terms/sellertos).
+2. [Download](https://www.opencart.com/index.php?route=marketplace/download&member_token=vYblOTrYQ1rwGyHBu7dbnkkG6ExRznUL&extension_id=37076) the Google Pay OpenCart Extension for the marketplace
 ![download from opencart](http://dl4.joxi.net/drive/2019/07/04/0014/3939/921443/43/36c6bd9427.jpg)
-2. Install it via the Extension Installer or upload all file into the root folder of your OpenCart installation.
+3. Install it via the Extension Installer or upload all file into the root folder of your OpenCart installation.
 ![go to extension installer](http://joxi.ru/J2bVw0vf0wEP82.jpg)
-3. Go to Admin -> Extensions -> Payments and click install next to Google Pay
+4. Go to Admin -> Extensions -> Payments and click install next to Google Pay
 ![go to extensions / payment methods](http://joxi.net/52azwGouEWNLRA.jpg)
-4. Go to Google Pay settings.
+5. Go to Google Pay settings.
 
 ### After we have installed the Google Pay extension, we will need to receive the Google Pay Merchant ID.
 
@@ -23,7 +24,7 @@ Now you can offer one-click checkout for your customers, reduce abandoned cart r
 4. Go to Admin panel of Google Pay OpenCart extension and paste the Merchant ID
 ![Find Merchant ID and copy it](http://joxi.net/12MYwLXUl76pp2.jpg) 
 
-There is one more step. Google pay acts as a storage of customer's credit card data. It does not actually fulfill the transactions, rather shares the tokenized credit card data with a payment gateway, such as Braintree. 
+**IMPORTANT NOTES** &nbsp;&nbsp;&nbsp;&nbsp;Google Pay only generates transaction data, but does not actually process or settle the payment. Thus, the transaction data has to be sent to a Payment Service Provider (PSP), such as Braintree. 
 
 ## Google pay with Braintree
 
