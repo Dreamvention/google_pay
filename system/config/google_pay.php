@@ -1,5 +1,5 @@
 <?php 
-$_['google_pay_setting'] = array(
+$_['payment_google_pay_setting'] = array(
 	'merchant_id' => '12345',
 	'environment' => 'test',
 	'debug' => 0,
@@ -43,9 +43,36 @@ $_['google_pay_setting'] = array(
 					'type' => 'text',
 					'value' => '3.40.0'
 				),
+				'braintree_environment' => array(
+					'code' => 'braintree_environment',
+					'name' => 'text_braintree_environment',
+					'type' => 'select',
+					'option' => array(
+						'sandbox' => array(
+							'code' => 'sandbox', 
+							'name' => 'text_sandbox'
+						),
+						'production' => array(
+							'code' => 'production', 
+							'name' => 'text_production'
+						)
+					)
+				),
 				'braintree_merchant_id' => array(
 					'code' => 'braintree_merchant_id',
 					'name' => 'text_braintree_merchant_id',
+					'type' => 'text',
+					'value' => ''
+				),
+				'braintree_public_key' => array(
+					'code' => 'braintree_public_key',
+					'name' => 'text_braintree_public_key',
+					'type' => 'text',
+					'value' => ''
+				),
+				'braintree_private_key' => array(
+					'code' => 'braintree_private_key',
+					'name' => 'text_braintree_private_key',
 					'type' => 'text',
 					'value' => ''
 				),
@@ -66,19 +93,28 @@ $_['google_pay_setting'] = array(
 					'name' => 'text_globalpayments_merchant_id',
 					'type' => 'text',
 					'value' => ''
-				)
-			)
-		),
-		'worldpay' => array(
-			'code' => 'worldpay',
-			'name' => 'text_worldpay',
-			'fields' => array(
-				'worldpay_merchant_id' => array(
-					'code' => 'worldpay_merchant_id',
-					'name' => 'text_worldpay_merchant_id',
+				),
+				'globalpayments_shared_secret' => array(
+					'code' => 'globalpayments_shared_secret',
+					'name' => 'text_globalpayments_shared_secret',
 					'type' => 'text',
 					'value' => ''
-				)
+				),
+				'globalpayments_environment' => array(
+					'code' => 'globalpayments_environment',
+					'name' => 'text_globalpayments_environment',
+					'type' => 'select',
+					'option' => array(
+						'sandbox' => array(
+							'code' => 'https://api.sandbox.realexpayments.com/epage-remote.cgi', 
+							'name' => 'text_sandbox'
+						),
+						'production' => array(
+							'code' => 'https://api.realexpayments.com/epage-remote.cgi', 
+							'name' => 'text_production'
+						)
+					)
+				),
 			)
 		)
 	),
