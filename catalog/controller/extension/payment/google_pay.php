@@ -54,11 +54,6 @@ class ControllerExtensionPaymentGooglePay extends Controller {
 				'gateway' => 'globalpayments',
 				'gatewayMerchantId' => $merchant_gateway[$merchant_gateway_code]['field']['globalpayments_merchant_id']
 			);
-		} elseif ($merchant_gateway_code == 'worldpay') {
-			$parameters = array(
-				'gateway' => 'worldpay',
-				'gatewayMerchantId' => $merchant_gateway[$merchant_gateway_code]['field']['worldpay_merchant_id']
-			);
 		}
 		
 		$data['tokenization_specification'] = array(
@@ -89,38 +84,90 @@ class ControllerExtensionPaymentGooglePay extends Controller {
 		if (isset($this->request->post['data'])) {
 			$json_data = json_decode(htmlspecialchars_decode($this->request->post['data']), true);
 		}
+		
+		if (isset($json_data['paymentMethodData']['tokenizationData']['token']['error']['message'])) {
+			$this->error['warning'] = $json_data['paymentMethodData']['tokenizationData']['token']['error']['message'];
+		}
 				
 		if (!$this->error) {						
-			$message = '';
-													
-			if (isset($json_data['paymentMethodData']['description'])) {
-				$message .= $this->language->get('text_description') . $json_data['paymentMethodData']['description'] . "\n";
-			}
-			
-			if (isset($json_data['paymentMethodData']['tokenizationData']['type'])) {
-				$message .= $this->language->get('text_tokenization_data_type') . $json_data['paymentMethodData']['tokenizationData']['type'] . "\n";
-			}
-			
 			if (isset($json_data['paymentMethodData']['tokenizationData']['token'])) {
-				$message .= $this->language->get('text_tokenization_data_token') . $json_data['paymentMethodData']['tokenizationData']['token'] . "\n";
+				$token = json_decode($json_data['paymentMethodData']['tokenizationData']['token'], true);
 			}
 			
-			if (isset($json_data['paymentMethodData']['type'])) {
-				$message .= $this->language->get('text_type') . $json_data['paymentMethodData']['type'] . "\n";
-			}
+			if ($merchant_gateway_code == 'braintree') {
+				if (isset($token['androidPayCards'][0]['nonce']) && $token['androidPayCards'][0]['nonce']) {
+					require_once DIR_SYSTEM . 'library/google_pay/Braintree.php';
+		
+					$gateway = new Braintree_Gateway(array(
+						'environment' => $merchant_gateway[$merchant_gateway_code]['field']['braintree_environment'],
+						'merchantId' => $merchant_gateway[$merchant_gateway_code]['field']['braintree_merchant_id'],
+						'publicKey' => $merchant_gateway[$merchant_gateway_code]['field']['braintree_public_key'],
+						'privateKey' => $merchant_gateway[$merchant_gateway_code]['field']['braintree_private_key']
+					));
+		
+					$result = $gateway->transaction()->sale(array(
+						'amount' => $total_price,
+						'paymentMethodNonce' => $token['androidPayCards'][0]['nonce'],
+						'options' => array(
+							'submitForSettlement' => true
+						)
+					));
+		
+					if (!$result->success) {
+						if ($result->transaction) {
+							$this->error['warning'] = $result->transaction->processorResponseCode . ' ' . $result->transaction->processorResponseText;
+						} else {
+							$this->error['warning'] = implode(' ', $result->errors->deepAll());
+						}
+					}					
+				}
+			} elseif ($merchant_gateway_code == 'globalpayments') {
+				if ($token) {
+					require_once DIR_SYSTEM .'library/google_pay/GlobalPayments.php';
 
-			if (isset($json_data['paymentMethodData']['info']['cardNetwork'])) {
-				$message .= $this->language->get('text_card_network') . $json_data['paymentMethodData']['info']['cardNetwork'] . "\n";
+					$config = new GlobalPayments\Api\ServicesConfig();
+		
+					$config->merchantId = $merchant_gateway[$merchant_gateway_code]['field']['globalpayments_merchant_id'];
+					$config->accountId = 'internet';
+					$config->sharedSecret = $merchant_gateway[$merchant_gateway_code]['field']['globalpayments_shared_secret'];
+					$config->serviceUrl = $merchant_gateway[$merchant_gateway_code]['field']['globalpayments_environment'];
+		
+					GlobalPayments\Api\ServicesContainer::configure($config);
+		
+					$card = new GlobalPayments\Api\PaymentMethods\CreditCardData();
+					
+					$card->token = $json_data['paymentMethodData']['tokenizationData']['token'];
+					$card->mobileType = GlobalPayments\Api\Entities\Enums\EncyptedMobileType::GOOGLE_PAY;
+
+					try {    
+						$response = $card->charge($total_price)->withCurrency($currency_code)->withModifier(GlobalPayments\Api\Entities\Enums\TransactionModifier::ENCRYPTED_MOBILE)->execute();
+						
+						$code = $response->responseCode;
+						$message = $response->responseMessage;
+    
+						if ($code != '00') {
+							$this->error['warning'] = $message;
+						}
+									
+						$orderId = $response->orderId;
+						$authCode = $response->authorizationCode;
+						$paymentsReference = $response->transactionId;
+					} catch (ApiException $e) {
+						$this->error['warning'] = implode(' ', $e);
+					}					
+				}
 			}
-			
-			if (isset($json_data['paymentMethodData']['info']['cardDetails'])) {
-				$message .= $this->language->get('text_card_details') . $json_data['paymentMethodData']['info']['cardDetails'] . "\n";
-			}
-			
-			$this->model_checkout_order->addOrderHistory($this->session->data['order_id'], $this->config->get('google_pay_order_status_id'), $message, false);
 		}
 				
 		if (!$this->error) {
+			$message = '';
+													
+			if (isset($json_data['paymentMethodData']['description'])) {
+				$message .= $json_data['paymentMethodData']['description'];
+			}
+			
+			$this->model_checkout_order->addOrderHistory($this->session->data['order_id'], $this->config->get('google_pay_order_status_id'), $message, false);
+			
 			$data['success'] = $this->url->link('checkout/success');
 		}
 		
