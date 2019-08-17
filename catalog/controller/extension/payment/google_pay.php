@@ -54,11 +54,6 @@ class ControllerExtensionPaymentGooglePay extends Controller {
 				'gateway' => 'globalpayments',
 				'gatewayMerchantId' => $merchant_gateway[$merchant_gateway_code]['field']['globalpayments_merchant_id']
 			);
-		} elseif ($merchant_gateway_code == 'worldpay') {
-			$parameters = array(
-				'gateway' => 'worldpay',
-				'gatewayMerchantId' => $merchant_gateway[$merchant_gateway_code]['field']['worldpay_merchant_id']
-			);
 		}
 		
 		$data['tokenization_specification'] = array(
