@@ -35,12 +35,10 @@ $_['text_braintree_merchant_id']	 	= 'Braintree Merchant ID';
 $_['text_braintree_public_key']	 		= 'Braintree Public Key';
 $_['text_braintree_private_key']	 	= 'Braintree Private Key';
 $_['text_braintree_tokenization_key']	= 'Braintree Tokenization Key';
-$_['text_firstdata']			 	 	= 'First Data';
-$_['text_firstdata_merchant_id']	 	= 'First Data Merchant ID';
 $_['text_globalpayments']			 	= 'Global Payments';
 $_['text_globalpayments_merchant_id']	= 'Global Payments Merchant ID';
-$_['text_worldpay']			 		 	= 'Worldpay';
-$_['text_worldpay_merchant_id']		 	= 'Worldpay Merchant ID';
+$_['text_globalpayments_shared_secret']	= 'Global Payments Shared Secret';
+$_['text_globalpayments_environment']	= 'Global Payments Environment';
 
 // Entry
 $_['entry_merchant_id']			 		= 'Google Merchant ID';

@@ -93,19 +93,28 @@ $_['payment_google_pay_setting'] = array(
 					'name' => 'text_globalpayments_merchant_id',
 					'type' => 'text',
 					'value' => ''
-				)
-			)
-		),
-		'worldpay' => array(
-			'code' => 'worldpay',
-			'name' => 'text_worldpay',
-			'fields' => array(
-				'worldpay_merchant_id' => array(
-					'code' => 'worldpay_merchant_id',
-					'name' => 'text_worldpay_merchant_id',
+				),
+				'globalpayments_shared_secret' => array(
+					'code' => 'globalpayments_shared_secret',
+					'name' => 'text_globalpayments_shared_secret',
 					'type' => 'text',
 					'value' => ''
-				)
+				),
+				'globalpayments_environment' => array(
+					'code' => 'globalpayments_environment',
+					'name' => 'text_globalpayments_environment',
+					'type' => 'select',
+					'option' => array(
+						'sandbox' => array(
+							'code' => 'https://api.sandbox.realexpayments.com/epage-remote.cgi', 
+							'name' => 'text_sandbox'
+						),
+						'production' => array(
+							'code' => 'https://api.realexpayments.com/epage-remote.cgi', 
+							'name' => 'text_production'
+						)
+					)
+				),
 			)
 		)
 	),

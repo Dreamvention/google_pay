@@ -78,33 +78,6 @@ class ControllerExtensionPaymentGooglePay extends Controller {
 			$data['allowed_card_auth_methods'][] = strtoupper($auth_method_code);
 		}
 		
-		/*require_once DIR_SYSTEM .'library/google_pay/braintree.php';
-		
-		$gateway = new Braintree_Gateway([
-			'environment' => 'production',
-			'merchantId' => '54hj89579gh8pcfk',
-			'publicKey' => '7cwgkfkwg5t955y4',
-			'privateKey' => 'b48c45b672880894a028cf02856e59ff'
-		]);
-		
-		$result = $gateway->transaction()->sale([
-			'amount' => '1.00',
-			'paymentMethodNonce' => '0e3a0d0b-69b8-0229-212f-e8a6f8432b51',
-			'options' => [ 'submitForSettlement' => true ]
-		]);
-		
-		if ($result->success) {
-    print_r("success!: " . $result->transaction->id);
-} else if ($result->transaction) {
-    print_r("Error processing transaction:");
-    print_r("\n  code: " . $result->transaction->processorResponseCode);
-    print_r("\n  text: " . $result->transaction->processorResponseText);
-} else {
-    print_r("Validation errors: \n");
-    print_r($result->errors->deepAll());
-}*/
-
-
 		return $this->load->view('extension/payment/google_pay', $data);
 	}
 	
@@ -162,15 +135,40 @@ class ControllerExtensionPaymentGooglePay extends Controller {
 					}					
 				}
 			} elseif ($merchant_gateway_code == 'globalpayments') {
-				/*$parameters = array(
-					'gateway' => 'globalpayments',
-					'gatewayMerchantId' => $merchant_gateway[$merchant_gateway_code]['field']['globalpayments_merchant_id']
-				);*/
-			} elseif ($merchant_gateway_code == 'worldpay') {
-				/*$parameters = array(
-					'gateway' => 'worldpay',
-					'gatewayMerchantId' => $merchant_gateway[$merchant_gateway_code]['field']['worldpay_merchant_id']
-				);*/
+				if ($token) {
+					require_once DIR_SYSTEM .'library/google_pay/GlobalPayments.php';
+
+					$config = new GlobalPayments\Api\ServicesConfig();
+		
+					$config->merchantId = $merchant_gateway[$merchant_gateway_code]['field']['globalpayments_merchant_id'];
+					$config->accountId = 'internet';
+					$config->sharedSecret = $merchant_gateway[$merchant_gateway_code]['field']['globalpayments_shared_secret'];
+					$config->serviceUrl = $merchant_gateway[$merchant_gateway_code]['field']['globalpayments_environment'];
+		
+					GlobalPayments\Api\ServicesContainer::configure($config);
+		
+					$card = new GlobalPayments\Api\PaymentMethods\CreditCardData();
+					
+					$card->token = $json_data['paymentMethodData']['tokenizationData']['token'];
+					$card->mobileType = GlobalPayments\Api\Entities\Enums\EncyptedMobileType::GOOGLE_PAY;
+
+					try {    
+						$response = $card->charge($total_price)->withCurrency($currency_code)->withModifier(GlobalPayments\Api\Entities\Enums\TransactionModifier::ENCRYPTED_MOBILE)->execute();
+						
+						$code = $response->responseCode;
+						$message = $response->responseMessage;
+    
+						if ($code != '00') {
+							$this->error['warning'] = $message;
+						}
+									
+						$orderId = $response->orderId;
+						$authCode = $response->authorizationCode;
+						$paymentsReference = $response->transactionId;
+					} catch (ApiException $e) {
+						$this->error['warning'] = implode(' ', $e);
+					}					
+				}
 			}
 		}
 		
