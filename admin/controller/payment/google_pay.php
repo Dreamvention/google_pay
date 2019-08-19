@@ -30,6 +30,7 @@ class ControllerPaymentGooglePay extends Controller {
 		$data['text_advanced'] = $this->language->get('text_advanced');
 		$data['text_button'] = $this->language->get('text_button');
 		$data['text_production'] = $this->language->get('text_production');
+		$data['text_sandbox'] = $this->language->get('text_sandbox');
 		$data['text_test'] = $this->language->get('text_test');
 		$data['text_default'] = $this->language->get('text_default');
 		$data['text_black'] = $this->language->get('text_black');
@@ -48,16 +49,15 @@ class ControllerPaymentGooglePay extends Controller {
 		$data['text_braintree'] = $this->language->get('text_braintree');
 		$data['text_braintree_api_version'] = $this->language->get('text_braintree_api_version');
 		$data['text_braintree_sdk_version'] = $this->language->get('text_braintree_sdk_version');
+		$data['text_braintree_environment']	= $this->language->get('text_braintree_environment');
 		$data['text_braintree_merchant_id'] = $this->language->get('text_braintree_merchant_id');
+		$data['text_braintree_public_key'] = $this->language->get('text_braintree_public_key');
+		$data['text_braintree_private_key'] = $this->language->get('text_braintree_private_key');
 		$data['text_braintree_tokenization_key'] = $this->language->get('text_braintree_tokenization_key');
-		$data['text_firstdata'] = $this->language->get('text_firstdata');
-		$data['text_firstdata_merchant_id'] = $this->language->get('text_firstdata_merchant_id');
 		$data['text_globalpayments'] = $this->language->get('text_globalpayments');
 		$data['text_globalpayments_merchant_id'] = $this->language->get('text_globalpayments_merchant_id');
-		$data['text_worldpay'] = $this->language->get('text_worldpay');
-		$data['text_worldpay_merchant_id'] = $this->language->get('text_worldpay_merchant_id');
-		$data['text_not_enabled'] = $this->language->get('text_not_enabled');
-		$data['text_no_gateways_enabled'] = $this->language->get('text_no_gateways_enabled');
+		$data['text_globalpayments_shared_secret'] = $this->language->get('text_globalpayments_shared_secret');
+		$data['text_globalpayments_environment'] = $this->language->get('text_globalpayments_environment');
 
 		$data['entry_merchant_id'] = $this->language->get('entry_merchant_id');
 		$data['entry_merchant_name'] = $this->language->get('entry_merchant_name');

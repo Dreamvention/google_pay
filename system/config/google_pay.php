@@ -1,5 +1,5 @@
 <?php 
-$_['payment_google_pay_setting'] = array(
+$_['google_pay_setting'] = array(
 	'merchant_id' => '12345',
 	'environment' => 'test',
 	'debug' => 0,
