@@ -160,6 +160,17 @@
 										<?php if ($field['type'] == 'text') { ?>
 										<input type="text" name="google_pay_merchant_gateway[<?php echo $merchant_gateway['code']; ?>][field][<?php echo $field['code']; ?>]" value="<?php if (isset($google_pay_merchant_gateway[$merchant_gateway['code']]['field'][$field['code']])) { ?><?php echo $google_pay_merchant_gateway[$merchant_gateway['code']]['field'][$field['code']]; ?><?php } elseif (isset($field['value'])) { ?><?php echo $field['value']; ?><?php } ?>" class="form-control" />
 										<?php } ?>
+										<?php if ($field['type'] == 'select') { ?>
+										<select name="google_pay_merchant_gateway[<?php echo $merchant_gateway['code']; ?>][field][<?php echo $field['code']; ?>]" class="form-control">
+											<?php foreach ($field['option'] as $option) { ?>
+											<?php if ($option['code'] == $google_pay_merchant_gateway[$merchant_gateway['code']]['field'][$field['code']]) { ?>
+											<option value="<?php echo $option['code']; ?>" selected="selected"><?php echo ${$option['name']}; ?></option>
+											<?php } else { ?>
+											<option value="<?php echo $option['code']; ?>"><?php echo ${$option['name']}; ?></option>
+											<?php } ?>
+											<?php } ?>
+										</select>
+										<?php } ?>
 									</div>
 								</div>
 								<?php } ?>

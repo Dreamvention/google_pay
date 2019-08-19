@@ -81,6 +81,14 @@ class ControllerExtensionPaymentGooglePay extends Controller {
 		
 		$this->load->model('checkout/order');
 		
+		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
+
+		$total_price = $this->currency->format($order_info['total'], $order_info['currency_code'], $order_info['currency_value'], false);
+		$currency_code = $order_info['currency_code'];
+		
+		$merchant_gateway_code = $this->config->get('payment_google_pay_merchant_gateway_code');
+		$merchant_gateway = $this->config->get('payment_google_pay_merchant_gateway');
+		
 		if (isset($this->request->post['data'])) {
 			$json_data = json_decode(htmlspecialchars_decode($this->request->post['data']), true);
 		}
@@ -89,7 +97,7 @@ class ControllerExtensionPaymentGooglePay extends Controller {
 			$this->error['warning'] = $json_data['paymentMethodData']['tokenizationData']['token']['error']['message'];
 		}
 				
-		if (!$this->error) {						
+		if (!$this->error) {					
 			if (isset($json_data['paymentMethodData']['tokenizationData']['token'])) {
 				$token = json_decode($json_data['paymentMethodData']['tokenizationData']['token'], true);
 			}
