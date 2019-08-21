@@ -113,21 +113,25 @@ class ControllerExtensionPaymentGooglePay extends Controller {
 						'privateKey' => $merchant_gateway[$merchant_gateway_code]['field']['braintree_private_key']
 					));
 		
-					$result = $gateway->transaction()->sale(array(
-						'amount' => $total_price,
-						'paymentMethodNonce' => $token['androidPayCards'][0]['nonce'],
-						'options' => array(
-							'submitForSettlement' => true
-						)
-					));
+					try {
+						$result = $gateway->transaction()->sale(array(
+							'amount' => $total_price,
+							'paymentMethodNonce' => $token['androidPayCards'][0]['nonce'],
+							'options' => array(
+								'submitForSettlement' => true
+							)
+						));
 		
-					if (!$result->success) {
-						if ($result->transaction) {
-							$this->error['warning'] = $result->transaction->processorResponseCode . ' ' . $result->transaction->processorResponseText;
-						} else {
-							$this->error['warning'] = implode(' ', $result->errors->deepAll());
+						if (!$result->success) {
+							if ($result->transaction) {
+								$this->error['warning'] = $result->transaction->processorResponseCode . ' ' . $result->transaction->processorResponseText;
+							} else {
+								$this->error['warning'] = implode(' ', $result->errors->deepAll());
+							}
 						}
-					}					
+					} catch (Exception $exception) {
+						$this->error['warning'] = $exception->getMessage() ? $exception->getMessage() : get_class($exception);
+					}			
 				}
 			} elseif ($merchant_gateway_code == 'globalpayments') {
 				if ($token) {
@@ -154,15 +158,15 @@ class ControllerExtensionPaymentGooglePay extends Controller {
 						$message = $response->responseMessage;
     
 						if ($code != '00') {
-							$this->error['warning'] = $message;
+							$this->error['warning'] = $code . ' ' . $message;
 						}
 									
 						$orderId = $response->orderId;
 						$authCode = $response->authorizationCode;
 						$paymentsReference = $response->transactionId;
-					} catch (ApiException $e) {
-						$this->error['warning'] = implode(' ', $e);
-					}					
+					} catch (GlobalPayments\Api\Entities\Exceptions\ApiException $exception) {
+						$this->error['warning'] = $exception->responseCode . ' ' . $exception->responseMessage;
+					}				
 				}
 			}
 		}
