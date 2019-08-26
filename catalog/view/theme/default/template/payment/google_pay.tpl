@@ -1,6 +1,6 @@
 <div id="form_google_pay" class="form-horizontal">
 	<div class="buttons">
-		<iframe id="google_pay_button_container" class="pull-right" src="https://googlepay.opencart.com" width="300" height="60" frameBorder="0"></iframe>
+		<iframe id="google_pay_button_container" class="pull-right" src="https://googlepay.opencart.com" width="300" height="60" frameBorder="0" allowpaymentrequest="true"></iframe>
 	</div>
 </div>
 <script type="text/javascript">
