@@ -54,3 +54,34 @@ That is it. You have successfully setup Google Pay with Braintree for OpenCart.
 ![Buy with Google Pay on OpenCart Checkout](http://joxi.ru/52azwGouEWN6RA.jpg) 
 
 Your customer will thank you for simplifying their life as well as securing their credit card information since they don't have to enter their credit card data on the site and google pay only shares the tokenized credit card data.   
+
+
+## Google pay with Global Payments
+
+Global payments is a popular payment method used with Google pay. 
+
+1. Register with Global Payments.
+
+New merchants can sign up for Global Payments services by completing the following form:
+https://www.globalpaymentsinc.com/en-gb/contact-us/new-customers  
+
+![Create account with Global Payments](http://joxi.net/gmvvxLkuqwlQlm.jpg)
+
+2. Once onboarded, your account manager will securely pass to you your account details:
+Merchant ID (CLient ID)
+Shared Secret
+
+These are the details you need to get started with Global Payments eCommerce.
+
+3. In order to enable Google Pay on Global Payments eCommerce, simply request this from your account manager.
+
+4. In your OpenCart admin panel go to Google Pay -> Gateways and select Global Payments. Enter the credentials as follows. 
+
+![Copy the credentials to OpenCart admin panel](http://joxi.net/52azwGouENpvlA.jpg)
+
+5. Select Global Payments Environment as Production/Live
+
+6. In tab General select Status Enabled and click Save.
+
+
+That is it. You have successfully setup Google Pay with Global Payments for OpenCart. 
