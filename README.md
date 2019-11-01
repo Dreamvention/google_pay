@@ -74,9 +74,9 @@ https://www.globalpaymentsinc.com/en-gb/contact-us/new-customers
 
 2. Once onboarded, your account manager will securely pass to you your account details:
 
-Merchant ID (Client ID)
+<strong>Merchant ID (Client ID)</strong>
 
-Shared Secret
+<strong>Shared Secret</strong>
 
 These are the details you need to get started with Global Payments eCommerce.
 
