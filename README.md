@@ -26,8 +26,8 @@ With Google Pay extension, you can offer one-click checkout for your customers, 
 
 **IMPORTANT NOTES** &nbsp;&nbsp;&nbsp;&nbsp;Google Pay only generates transaction data, but does not actually process or settle the payment. Thus, the transaction data has to be sent to a Payment Service Provider (PSP), such as Braintree. 
 
-## Google Pay payment providers
-Google pay requires a payment provider like Braintree to process the payments.
+## Google Pay Payment Service Providers
+Google pay requires a payment provider like Braintree to process or settle the payments.
 <details><summary><strong>Enable Google pay with Braintree</strong></summary>
 <p>
 
