@@ -26,7 +26,8 @@ With Google Pay extension, you can offer one-click checkout for your customers, 
 
 **IMPORTANT NOTES** &nbsp;&nbsp;&nbsp;&nbsp;Google Pay only generates transaction data, but does not actually process or settle the payment. Thus, the transaction data has to be sent to a Payment Service Provider (PSP), such as Braintree. 
 
-## Google pay with Braintree
+<details><summary>Enable Google pay with Braintree</summary>
+<p>
 
 Let's see how we can connect Google Pay with Braintree, one of many supported gateways. 
 
@@ -54,10 +55,12 @@ That is it. You have successfully setup Google Pay with Braintree for OpenCart.
 ![Buy with Google Pay on OpenCart Checkout](http://joxi.ru/52azwGouEWN6RA.jpg) 
 
 Your customer will thank you for simplifying their life as well as securing their credit card information since they don't have to enter their credit card data on the site and google pay only shares the tokenized credit card data.   
-
-
-## Google pay with Global Payments
-
+</p>
+</details>
+<details><summary>Enable Google pay with Global Payments</summary>
+<p>
+Google pay with Global Payments
+  
 Global payments is a popular payment method used with Google pay. 
 
 1. Register with Global Payments.
@@ -68,7 +71,9 @@ https://www.globalpaymentsinc.com/en-gb/contact-us/new-customers
 ![Create account with Global Payments](http://joxi.net/gmvvxLkuqwlQlm.jpg)
 
 2. Once onboarded, your account manager will securely pass to you your account details:
-Merchant ID (CLient ID)
+
+Merchant ID (Client ID)
+
 Shared Secret
 
 These are the details you need to get started with Global Payments eCommerce.
@@ -85,3 +90,6 @@ These are the details you need to get started with Global Payments eCommerce.
 
 
 That is it. You have successfully setup Google Pay with Global Payments for OpenCart. 
+
+</p>
+</details>
