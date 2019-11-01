@@ -26,7 +26,9 @@ With Google Pay extension, you can offer one-click checkout for your customers, 
 
 **IMPORTANT NOTES** &nbsp;&nbsp;&nbsp;&nbsp;Google Pay only generates transaction data, but does not actually process or settle the payment. Thus, the transaction data has to be sent to a Payment Service Provider (PSP), such as Braintree. 
 
-<details><summary>Enable Google pay with Braintree</summary>
+## Google Pay payment providers
+Google pay requires a payment provider like Braintree to process the payments.
+<details><summary><strong>Enable Google pay with Braintree</strong></summary>
 <p>
 
 Let's see how we can connect Google Pay with Braintree, one of many supported gateways. 
@@ -57,7 +59,7 @@ That is it. You have successfully setup Google Pay with Braintree for OpenCart.
 Your customer will thank you for simplifying their life as well as securing their credit card information since they don't have to enter their credit card data on the site and google pay only shares the tokenized credit card data.   
 </p>
 </details>
-<details><summary>Enable Google pay with Global Payments</summary>
+<details><summary><strong>Enable Google pay with Global Payments</strong></summary>
 <p>
 Google pay with Global Payments
   
