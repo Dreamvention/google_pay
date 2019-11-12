@@ -1,37 +1,37 @@
 # Google Pay<sup>TM</sup> with OpenCart 
 
-Google Pay lets your customers pay with the press of a button — using payment methods saved to their Google Accounts. Google Pay works for both customers shopping at physical store and online in your apps or websites. Now, this is also possible with OpenCart's extension.
+Google Pay<sup>TM</sup> lets your customers pay with the press of a button — using payment methods saved to their Google Accounts. Google Pay works for both customers shopping at physical store and online in your apps or websites. Now, this is also possible with OpenCart's extension.
 
-With Google Pay extension, you can offer one-click checkout for your customers, reduce abandoned cart rate and increase conversion. 
+With Google Pay<sup>TM</sup> extension, you can offer one-click checkout for your customers, reduce abandoned cart rate and increase conversion. 
 
-## Here is how you can set up Google Pay today:
+## Here is how you can set up Google Pay<sup>TM</sup> today:
 
-1. By using Google Pay extension, you adhere to the Google Pay APIs [Acceptable Use Policy](https://payments.developers.google.com/terms/aup) and accept the terms defined in the [Google Pay API Terms of Service](https://payments.developers.google.com/terms/sellertos).
-2. [Download](https://www.opencart.com/index.php?route=marketplace/download&member_token=vYblOTrYQ1rwGyHBu7dbnkkG6ExRznUL&extension_id=37076) the Google Pay OpenCart Extension for the marketplace
+1. By using Google Pay<sup>TM</sup> extension, you adhere to the Google Pay<sup>TM</sup> APIs [Acceptable Use Policy](https://payments.developers.google.com/terms/aup) and accept the terms defined in the [Google Pay API Terms of Service](https://payments.developers.google.com/terms/sellertos).
+2. [Download](https://www.opencart.com/index.php?route=marketplace/download&member_token=vYblOTrYQ1rwGyHBu7dbnkkG6ExRznUL&extension_id=37076) the Google Pay<sup>TM</sup> OpenCart Extension for the marketplace
 ![download from opencart](http://dl4.joxi.net/drive/2019/07/04/0014/3939/921443/43/36c6bd9427.jpg)
 3. Install it via the Extension Installer or upload all file into the root folder of your OpenCart installation.
 ![go to extension installer](http://joxi.ru/J2bVw0vf0wEP82.jpg)
-4. Go to Admin -> Extensions -> Payments and click install next to Google Pay
+4. Go to Admin -> Extensions -> Payments and click install next to Google Pay<sup>TM</sup>
 ![go to extensions / payment methods](http://joxi.net/52azwGouEWNLRA.jpg)
-5. Go to Google Pay settings.
+5. Go to Google Pay<sup>TM</sup> settings.
 
-### After we have installed the Google Pay extension, we will need to receive the Google Pay Merchant ID.
+### After we have installed the Google Pay<sup>TM</sup> extension, we will need to receive the Google Pay<sup>TM</sup> Merchant ID.
 
 1. Visit https://pay.google.com
 ![Find Merchant ID and copy it](http://joxi.net/l2ZRw70szaBKL2.jpg)
 2. Click settings 
 3. Find Merchant ID and copy it
-4. Go to Admin panel of Google Pay OpenCart extension and paste the Merchant ID
+4. Go to Admin panel of Google Pay<sup>TM</sup> OpenCart extension and paste the Merchant ID
 ![Find Merchant ID and copy it](http://joxi.net/12MYwLXUl76pp2.jpg) 
 
-**IMPORTANT NOTES** &nbsp;&nbsp;&nbsp;&nbsp;Google Pay only generates transaction data, but does not actually process or settle the payment. Thus, the transaction data has to be sent to a Payment Service Provider (PSP), such as Braintree. 
+**IMPORTANT NOTES** &nbsp;&nbsp;&nbsp;&nbsp;Google Pay<sup>TM</sup> only generates transaction data, but does not actually process or settle the payment. Thus, the transaction data has to be sent to a Payment Service Provider (PSP), such as Braintree. 
 
-## Google Pay Payment Service Providers
-Google pay requires a payment provider like Braintree to process or settle the payments.
-<details><summary><strong>Enable Google pay with Braintree</strong></summary>
+## Google Pay<sup>TM</sup> Payment Service Providers
+Google pay<sup>TM</sup> requires a payment provider like Braintree to process or settle the payments.
+<details><summary><strong>Enable Google pay<sup>TM</sup> with Braintree</strong></summary>
 <p>
 
-Let's see how we can connect Google Pay with Braintree, one of many supported gateways. 
+Let's see how we can connect Google Pay<sup>TM</sup> with Braintree, one of many supported gateways. 
 
 1. log in to Braintree https://www.braintreegateway.com/login
 ![Log in to braintree](http://joxi.ru/v29Pg09hZOX7pm.jpg) 
@@ -39,13 +39,13 @@ Let's see how we can connect Google Pay with Braintree, one of many supported ga
 ![Find gear icon and go to processing](http://joxi.ru/Vrw8kK1S75wZvm.jpg) 
 3. Click Processing from the drop-down menu
 4. Scroll to the Payment Methods section
-![FActivate google pay for braintree](http://joxi.ru/EA4zlJEuoKnbMm.jpg) 
-5. Next to Google Pay, click the toggle to turn it on
+![FActivate google pay<sup>TM</sup> for braintree](http://joxi.ru/EA4zlJEuoKnbMm.jpg) 
+5. Next to Google Pay<sup>TM</sup>, click the toggle to turn it on
 6. In the top menu click API
 ![Click API in menu and generate new api keys](http://joxi.ru/Vm6xNgpF4XQydA.jpg) 
 7. Now generate a New API key and a New Tokenized key 
-8. Return to the Admin panel of Google Pay OpenCart extension and open tab Gateway. 
-![Go to OpenCart Google pay admin panel](http://joxi.ru/gmvvxLkuqQwpem.jpg) 
+8. Return to the Admin panel of Google Pay<sup>TM</sup> OpenCart extension and open tab Gateway. 
+![Go to OpenCart Google pay<sup>TM</sup> admin panel](http://joxi.ru/gmvvxLkuqQwpem.jpg) 
 9. Select Braintree and past the credentials from Braintree API tab accordingly.  
 ![Click view to see private key ](http://joxi.ru/GrqXRQ3F48wpXA.jpg)
 ![Copy the credentials to OpenCart admin panel](http://joxi.ru/p279JlzcKD9Oar.jpg)
