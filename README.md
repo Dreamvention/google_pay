@@ -15,15 +15,6 @@ With Google Pay<sup>TM</sup> extension, you can offer one-click checkout for you
 ![go to extensions / payment methods](http://joxi.net/52azwGouEWNLRA.jpg)
 5. Go to Google Pay<sup>TM</sup> settings.
 
-### After we have installed the Google Pay<sup>TM</sup> extension, we will need to receive the Google Pay<sup>TM</sup> Merchant ID.
-
-1. Visit https://pay.google.com
-![Find Merchant ID and copy it](http://joxi.net/l2ZRw70szaBKL2.jpg)
-2. Click settings 
-3. Find Merchant ID and copy it
-4. Go to Admin panel of Google Pay<sup>TM</sup> OpenCart extension and paste the Merchant ID
-![Find Merchant ID and copy it](http://joxi.net/12MYwLXUl76pp2.jpg) 
-
 **IMPORTANT NOTES** &nbsp;&nbsp;&nbsp;&nbsp;Google Pay<sup>TM</sup> only generates transaction data, but does not actually process or settle the payment. Thus, the transaction data has to be sent to a Payment Service Provider (PSP), such as Braintree. 
 
 ## Google Pay<sup>TM</sup> Payment Service Providers
